@@ -4,7 +4,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-import br.com.syonet.business.LivroBusiness;
 import br.com.syonet.entidade.Livro;
 
 public class LivroDAO {
@@ -23,8 +22,6 @@ public class LivroDAO {
 	public Livro buscaPorId ( Integer id ) {
 		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("jpa-banco");
 		EntityManager entityManager = entityManagerFactory.createEntityManager();
-		
-		//entityManager.getTransaction().begin();
 
 		Livro livro1 = entityManager.find(Livro.class, id);
 		

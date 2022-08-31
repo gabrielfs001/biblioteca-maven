@@ -1,10 +1,13 @@
 package br.com.syonet.entidade;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -21,9 +24,6 @@ public class Livro {
 	@Column
 	private String tituloOriginal;
 	
-	@Column(nullable = false)
-	private String nomeAutor;
-	
 	@Column
 	private String editora;
 	
@@ -33,6 +33,9 @@ public class Livro {
 	@Column(name = "no_numeroEdicao")
 	private Integer numeroEdicao;
 	
+	@ManyToOne ( cascade=CascadeType.ALL )
+	@JoinColumn(name= "id_autor")
+	private Autor autor;
 	
 	public Integer getId() {
 		return id;
@@ -52,12 +55,6 @@ public class Livro {
 	public void setTituloOriginal(String tituloOriginal) {
 		this.tituloOriginal = tituloOriginal;
 	}
-	public String getNomeAutor() {
-		return nomeAutor;
-	}
-	public void setNomeAutor(String nomeAutor) {
-		this.nomeAutor = nomeAutor;
-	}
 	public String getEditora() {
 		return editora;
 	}
@@ -76,8 +73,13 @@ public class Livro {
 	public void setNumeroEdicao(Integer numeroEdicao) {
 		this.numeroEdicao = numeroEdicao;
 	}
-	
+	public Autor getAutor() {
+		return autor;
+	}
+	public void setAutor(Autor autor) {
+		this.autor = autor;
+	}
 	public String toString() {
-		return "ID: " + getId() +" - Título: " + getTitulo() + " - Nome Autor: " + getNomeAutor() + ".";
+		return "ID: " + getId() +" - Título: " + getTitulo() + " - Nome Autor: " + getAutor() + ".";
 	}
 }
